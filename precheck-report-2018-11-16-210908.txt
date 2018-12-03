@@ -1,0 +1,138 @@
+Operation Automation Upgrade Precheck Report for 'Claro Cloud'
+
+Current domain:            linmn01.pa.clarocloud.com.ar
+Date of report:            2018-11-16 21:09:08
+Current Operation Automation build:         oa-7.2-2563 (oa-7.2-2563_KB132169-54)
+Target Operation Automation build:          7.3 
+Precheck version:          oa-7.3-1240
+Operation Automation version:               oa-7.3-1240
+ 1. Success
+      No issues preventing upgrade were found: you may continue with upgrade, though before that, please, check results below.
+
+
+ 2.1. Following checks have succeeded
+
+  Check Java version [pleskd]                                                            Check PPM site access [pleskd]
+  Check PA Central YUM repo access [pleskd]                                              Check unfinished process of modules updating/installing [pleskd]
+  Check build version requirements [pleskd]                                              Checking hostname resolution [pleskd]
+  Checking CPU performance [pleskd]                                                      Check Billing [pleskd]
+  Check OS requirements [pleskd]                                                         Check OA Core HA [pleskd]
+  190001-POA-112896-check-hostname-at-ui [pleskd]                                        190002-APS-43457-check-aps-booster-service-disabled [WebCluster]
+
+ 2.2. Following checks have been skipped
+
+  ================================================================================
+  |             Owner             |                Skipped actions               |
+  ================================================================================
+  | QmailCluster is not installed | 190000-POA-110546-check-obsolete-qmail-hosts |
+  --------------------------------------------------------------------------------
+
+
+ 3. Additional information:
+ 3.1.  Check slave hosts availability [pleskd]:
+       Checking slave hosts availability...
+       Checking if host lincplb.pa.clarocloud.com.ar (2) is available
+       Checking if host linweb01.pa.clarocloud.com.ar (5) is available
+       Checking if host dns1.cloud.claro.com.ar (6) is available
+       Checking if host dns2.cloud.claro.com.ar (7) is available
+       Checking if host lindp01.pa.clarocloud.com.ar (8) is available
+       Checking if host linpgh01.pa.clarocloud.com.ar (9) is available
+       Checking if host NGCLUSTER (20) is available
+       Checking if host hewsl-01.pa.clarocloud.com.ar (21) is available
+       Checking if host hewsl-02.pa.clarocloud.com.ar (22) is available
+       Checking if host pbalinbe01.pa.clarocloud.arm.ar (25) is available
+       Checking if host pbalinfe01.pa.clarocloud.arm.ar (27) is available
+       Checking if host pbalinos01.pa.clarocloud.arm.ar (28) is available
+       Checking if host azscpaeh.pa.clarocloud.arm.ar (35) is available
+       Checking if host oaciimdb.cloudclaro.local (36) is available
+       Checking if host oaciim.cloudclaro.local (37) is available
+       Checking if host oaciprod001 (47) is available
+       Checking if host oaciprod002 (48) is available
+       Checking if host oaciprod004 (50) is available
+       Checking if host oaciprod005 (51) is available
+       Checking if host oaciprod006 (52) is available
+       Checking if host oaciprod007 (53) is available
+       Checking if host oaciprod008 (54) is available
+       Checking if host oaciprod003 (55) is available
+       Checking if host oaciprodbkp01 (56) is available
+       Checking if host OACIProdIMG01 (57) is available
+       Checking if host oaciprodbkp02 (58) is available
+       Checking if host oaciprodimg02 (59) is available
+       Checking if host linpgh02.pa.clarocloud.com.ar (63) is available
+ 3.2.  Check number of active tasks in Task Manager [pleskd]:
+       Number of active tasks in Task Manager: 4. OK.
+ 3.3.  Check number of unfinished installation tasks in Task Manager [pleskd]:
+       No unfinished installation tasks in Task Manager: OK.
+ 3.4.  Check uncompatible Java rpms [pleskd]:
+       Checking for incompatible JDK rpms (OpenJDK)...
+ 3.5.  Checking Billing nodes required free disk space [pleskd]:
+       Checking free disk space on billing node(s)
+ 3.6.  Checking MN /usr/local/pem required free disk space [pleskd]:
+       Checking free disk space on management node in /usr/local/pem
+ 3.7.  Checking MN /var/log required free disk space [pleskd]:
+       Checking free disk space on management node in /var/log
+ 3.8.  Checking MN /tmp required free disk space [pleskd]:
+       Checking free disk space on management node in /tmp
+ 3.9.  190001-POA-93836-check-cloudlinux-nodes [Apache]:
+       Checking WebHosting Linux nodes...
+       Checking the hewsl-01.pa.clarocloud.com.ar node...
+       Checking the installed license...
+       Checking CloudLinux network channels...
+       Checking the yum tool configuration
+       Checking the yum repositories
+       Checking the hewsl-02.pa.clarocloud.com.ar node...
+       Checking the installed license...
+       Checking CloudLinux network channels...
+       Checking the yum tool configuration
+       Checking the yum repositories
+ 3.10. 190003-POA-113954-check-store-templates-customization [pleskd]:
+       Checking if there are conflicts between the customized templates of the online store and the templates provided in the new version of Odin Automation Billing...
+       Checking the store #1 'Default' (vendor=1, company='Claro Cloud')...
+       Incompatible templates were found in the online store with ID #1:
+       TemplateID: preloader
+       TemplateID: checkout
+       TemplateID: domain_new
+       TemplateID: overall_wrapper
+       Checking the store #6 'Parallels' (vendor=1, company='Claro Cloud')...
+       Incompatible templates were found in the online store with ID #6:
+       TemplateID: overall_wrapper
+       Checking the store #5 'Claro Servicios Empresariales S.A. Store' (vendor=1000134, company='Claro Chile Servicios Empresariales S.A.')...
+       Incompatible templates were found in the online store with ID #5:
+       TemplateID: checkout
+       TemplateID: domain_new
+       TemplateID: overall_wrapper
+       Checking the store #7 'Claro Uruguay Store' (vendor=1016927, company='ZZ DO NOT USE Claro Uruguay')...
+       Incompatible templates were found in the online store with ID #7:
+       TemplateID: preloader
+       TemplateID: checkout
+       TemplateID: domain_new
+       TemplateID: overall_wrapper
+       Checking the store #10 'Default store' (vendor=1017188, company='Claro Uruguay')...
+       Checking the store #8 'Claro Uruguay Store' (vendor=1017188, company='Claro Uruguay')...
+       Incompatible templates were found in the online store with ID #8:
+       TemplateID: preloader
+       TemplateID: checkout
+       TemplateID: domain_new
+       TemplateID: overall_wrapper
+       Online stores can work incorrectly after upgrading to Odin Automation 7.3, so you should resolve incompatibility problems with the templates.
+       
+       Affected online stores:
+       Store #1 'Default' (vendor=1, company='Claro Cloud')
+       Store #6 'Parallels' (vendor=1, company='Claro Cloud')
+       Store #5 'Claro Servicios Empresariales S.A. Store' (vendor=1000134, company='Claro Chile Servicios Empresariales S.A.')
+       Store #7 'Claro Uruguay Store' (vendor=1016927, company='ZZ DO NOT USE Claro Uruguay')
+       Store #8 'Claro Uruguay Store' (vendor=1017188, company='Claro Uruguay')
+       
+       All of the following templates contain critical changes. You must resolve all conflicts in these templates, otherwise, your Online Store will be inoperable.
+       Template ID: checkout
+       
+       To resolve incompatibility issues in the templates of the Online Store, you need to do the following:
+       1) Upgrade to Odin Automation 7.3.
+       2) Run a utility that resolves conflicts between incompatible templates and the templates provided in the new version of Odin Automation Billing.
+       
+       With this utility, you can:
+       1) Apply changes in the new templates to your customized templates automatically.
+       2) See which templates remain incompatible.
+       3) Learn how to apply changes manually.
+       
+       To learn more, refer to https://kb.odin.com/en/130479.
