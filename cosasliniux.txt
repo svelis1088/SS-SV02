@@ -1,0 +1,2271 @@
+for para correr 4 veces por minuto
+
+#!/bin/sh
+for (( i=0; i<=3; i++ ))
+do
+chgrp nobody  /usr/local/apache/htdocs/*
+chown nobody /usr/local/apache/htdocs/*
+chown -R nobody:nobody /usr/local/apache/htdocs/*
+cd /usr/local/apache/htdocs/
+find . -type f -exec chmod 644 {} \;
+        sleep 15
+done
+
+
+#chgrp nobody  /usr/local/apache/htdocs/*
+#chown nobody /usr/local/apache/htdocs/*
+#chown -R nobody:nobody /usr/local/apache/htdocs/*
+#cd /usr/local/apache/htdocs/
+#find . -type f -exec chmod 644 {} \;
+
+
+config red ucom
+
+[root@ucom-s13 ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE="eth0"
+BOOTPROTO=none
+NM_CONTROLLED="yes"
+ONBOOT=yes
+TYPE="Ethernet"
+HWADDR=00:50:56:A4:7D:E2
+IPADDR=172.30.118.20
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME="System eth0"
+[root@ucom-s13 ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth1
+DEVICE="eth1"
+BOOTPROTO=none
+NM_CONTROLLED="yes"
+ONBOOT=yes
+TYPE="Ethernet"
+HWADDR=00:50:56:A4:12:D1
+IPADDR=200.59.161.79
+NETMASK=255.255.255.192
+GATEWAY=200.59.161.65
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME="System eth1"
+[root@ucom-s13 ~]# cat /etc/sysconfig/network-scripts/route-eth0 
+192.168.215.0/24 via 172.30.118.1 dev eth0
+192.168.214.0/23 via 172.30.118.1 dev eth0
+192.168.31.0/26 via 172.30.118.1 dev eth0
+[root@ucom-s13 ~]# 
+
+
+El método de resolución para con los restantes servidores es igual:
+
+while true;do  echo ------------Inicio--------------- ;date;echo -----------Conexiones------------; ls -ltra -h;echo  
+--------------------------------; sleep 30; date; done; 
+
+
+vi /etc/hosts
+Cambiar localhost… por el nombre del servidor (en minúsculas)
+
+cd /opt/OV/bin
+./ovconfget |grep -e NODE -e ADDR
+Comprobar acá que la IP es incorrecta y el nodename está en mayúsculas
+
+Corregimos con los datos correctos
+./ovconfchg -ns bbc.http -set CLIENT_BIND_ADDR <IP-de-management>
+./ovconfchg -ns eaagt -set OPC_NODENAME <hostname del equipo en minusculas>
+
+Hacemos que el agente tome la nueva configuración, genere un nuevo coreid, y pida certificado
+./ovc -stop
+./ovc -kill
+./ovcoreid -create -force
+./ovc -start CORE
+./ovcert -certreq
+192.168.215.127 ar-nols127.ol.mr ar-nols127
+
+export http_proxy="http://192.168.215.160:3128"      
+export ftp_proxy="http://192.168.215.160:3128"
+rhn_register --nox --proxy=
+nameserver  200.69.128.1
+nameserver  200.69.128.2
+
+
+
+[HUSVM_DVELOZ_ILTK_7] ARO-0001955124-SV10/ARO-0001955124-SV10.vmdk
+
+
+oper-idc
+publica
+
+root
+l6c1l3
+
+
+2.	Ir al directorio donde se descargaron los binarios
+chmod 777 opc_inst
+./opc_inst -srv ar-nols127.ol.mr -cert_srv ar-nols127.ol.mr
+3.	Una vez que termina de instalar y devuelve el prompt
+cd /opt/OV/bin
+./ovconfchg -ns bbc.http -set CLIENT_BIND_ADDR <IP_DE_GESTION>
+./ovcert -certreq
+
+
+ifup eth0
+ifup eth1
+route add -net 192.168.215.0/24 gw 172.30.107.185
+route add -net 192.168.214.0/23 gw 172.30.107.185
+route add -net 192.168.31.0/26 gw 172.30.107.185
+sfans-s01 ~ #
+wget -c http://sourcemirrors.org/scotth/centos/5/php/php-mcrypt-5.2.6-2.i386.rpm
+
+ rpm -i --nodeps php-mcrypt-5.2.6-2.i386.rpm
+
+
+ 63
+
+ 192.168.215.20
+
+ legajo
+
+
+ Installing:
+ libXp                                         i686                              1.0.0-15.1.el6                                rhel-6-server-rpms      
+                        22 k
+Installing for dependencies:
+ glibc                                         i686                              2.12-1.80.el6_3.5                             rhel-6-server-rpms      
+                       4.3 M
+ libX11                                        i686                              1.3-2.el6                                     rhel-6-server-rpms      
+                       585 k
+ libXau                                        i686                              1.0.5-1.el6                                   rhel-6-server-rpms      
+                        22 k
+ libXext                                       i686                              1.1-3.el6                                     rhel-6-server-rpms      
+                        33 k
+ libxcb                                        i686                              1.5-1.el6                                     rhel-6-server-rpms      
+                       103 k
+ nss-softokn-freebl                            i686                              3.12.9-11.el6                                 rhel-6-server-rpms      
+                       116 k
+Updating for dependencies:
+ glibc                                         x86_64                            2.12-1.80.el6_3.5                             rhel-6-server-rpms      
+                       3.8 M
+ glibc-common
+
+
+ userdel -fr admin-mdf
+ useradd admin-mdf
+ passwd admin-mdf
+ su admin-mdf -c "vncpasswd"
+
+011 38022311
+
+ # SAP settings
+kernel.msgmni=1024
+kernel.sem=1250 256000 100 1024
+vm.max_map_count=1000000
+
+Please check SAP note 941735 for recommendations on how to configure the kernel parameters kernel.shmmax and kernel.shmall and other memory related  
+settings for 64bit systems.
+
+Run the command "sysctl -p" to activate the modified kernel parameters.
+
+
+
+
+swap
+
+resize2fs /dev/vg_mdfs30p/lv_swap 8GB
+   63  resize2fs /dev/vg_mdfs30p/lv_swap 8G
+   64  resize2fs /dev/vg_mdfs30p/lv_swap 4096M
+   65  lvresize -L -8g /dev/vg_mdfs30p/lv_swap
+  195  ls /dev/mapper/vg_mdfs30p-lv_swap
+  196  ls -l /dev/mapper/vg_mdfs30p-lv_swap
+  199  swapoff
+  200  swapoff -v /dev/mapper/vg_mdfs30p-lv_swap
+  228  history |grep swap
+  231  swapon
+  232  swapon -a
+  233  man swapon
+  241  swap on
+  242  swapon
+  243  swapon -a
+  245  swapon -a
+  246  LC_ALL=C swapon -a -v
+  250  cat /proc/swaps
+  251  LC_ALL=C swapon -a -v
+  252  cat /proc/swaps
+  256  swapon -av
+  257  strace swapon -av
+  268  swapon
+  269  swapon -a
+  271  swapon -a -f
+  272  /sbin/mkswap /dev/mapper/vg_mdfs30p-lv_swap
+  273  /sbin/swapon /dev/mapper/vg_mdfs30p-lv_swap
+  291  lvdisplay /dev/vg_mdfs30p/lv_swap
+  325  history|grep swap
+
+
+  	 implementacion 1mpl3
+
+  https://200.59.145.236/index.php
+
+
+  lvdisplay
+    837  lvreduce -L40G /dev/mapper/fileserver-tmp
+    839  lvdisplay /dev/mapper/fileserver-tmp
+    840  lvextend -L10G /dev/fileserver/tmp
+    841  lvextend -L+10G /dev/fileserver/tmp
+    842  lvdisplay
+    843  lvdisplay |grep usr
+    844  lvcreate -name sap --size 20G fileserver
+    846  history|grep lvc
+    847  lvcreate --name sap  --size 30G fileserver
+    849  lvdisplay
+    866  lvdisplay
+    878  history|grep lv            
+    
+    Añadir partición SWAP al sistema en producción:                                                                                                    
+                                 
+    Creamos un “fichero” de 1Gb, el cual posteriormente usaremos para crear una partición Swap:                                                        
+                                 
+                                                                                                                                                       
+                             
+    dd if=/dev/zero of=/.swap bs=1024 count=1000000                                                                                                    
+                                 
+    Hacemos de ese fichero un sistema de ficheros swap:                                                                                                
+                                 
+                                                                                                                                                       
+                             
+    mkswap /.swap                                                                                                                                      
+                                 
+    Y activamos el espacio Swap:                                                                                                                       
+                                 
+                                                                                                                                                       
+                             
+    swapon /.swap                                                                                                                                      
+                                 
+    Si lanzamos un “free” o “top” veremos que ya tenemos el espacio swap funcionando. Por último hay que añadirlo al fichero /etc/fstab para que al  
+reiniciar se monte automáticamente:
+                                                                                                                                                       
+                             
+    /.swap swap swap defaults 0 0             
+    
+    aza13a                      
+    
+    exec /etc/X11/xinit/xinitrc        
+    
+    
+                                              
+                                              Sebastian
+
+Te paso la clave para que :
+
+Configures la IP de management
+Instalación agentes de backup
+Instalación agente de SNMP
+
+Gracias
+
+Gustavo
+
+
+
+De: Reos, Diego [mailto:diego.reos@cencosud.com.ar] 
+Enviado el: Miércoles, 12 de Diciembre de 2012 12:33
+Para: Gustavo Straface; Dibon, Esteban Enrique
+CC: Petruzzo, Karina; Moscoloni Castaldo, Marcelo; Toro, Mario; Schmitlein, Matias; Coscia, Javier; Peschen Maurizio, Paulo; Leandro Cardalda; Diego  
+Rodrigo; Pablo Minetti; Luciano Michat
+Asunto: RE: Cencosud - Analisis nuevos requerimientos CLOUD
+
+Gustavo te paso las credenciales de las VMs.
+ 
+Paso las credenciales de dichos servidores:
+root
+3nt3ld4t4
+                                                
+                                                
+                                                
+               pvcreate /dev/sdd1 --setphysicalvolumesize=3.64T                                 
+                                                
+216365 *-* telefono busho 4320-9600           
+
+cedula verde titulo reg dni       *-*-*-*-*-*-*  
+
+www.seguridadvial.gov.ar/licencia/cenat
+
+
+
+
+2.5G  /  2560
+1G /home / 1024
+1g /tmp 1024
+4g  /usr 4096 
+24g   /var 24064
+
+
+19:30
+
+
+
+
+
+[root@srvolnet3v ~]# cat /etc/sysconfig/network-scripts/route-eth0
+192.168.215.0/24  via 172.30.119.241 dev eth0
+192.168.214.0/23  via 172.30.119.241 dev eth0
+192.168.31.0/26  via 172.30.119.241 dev eth0
+[root@srvolnet3v ~]# 
+
+
+
+47616
+
+
+ setprop persist.sys.usb.config mass_storage,adb
+ 
+ 
+ 
+ 
+ rpm -Uvh \http://download.fedora.redhat.com/pub/epel/5/x86_64/epel-release-5-3.noarch.rpm
+ 
+ 
+------------------------------------------UBUNTU------------------------------------------ 
+ auto eth0
+iface eth0 inet static
+	address 172.30.116.204
+	netmask 255.255.255.240
+	network 172.30.116.192
+	broadcast 172.30.116.207
+	gateway 172.30.116.193
+	# dns-* options are implemented by the resolvconf package, if installed
+	dns-nameservers 172.30.116.193
+  
+ ### ruteo estatico ###
+#post-up route add -net 10.0.0.0 netmask 255.0.0.0 gw 10.9.38.65
+post-up route add -net 192.168.215.0/24 netmask 255.255.255.248 gw 172.30. 
+post-up route add -net 192.168.214.0/23 netmask 255.255.255.248 gw 172.30. 
+post-up route add -net 192.168.31.0/26  netmask 255.255.255.248 gw 172.30. 
+pre-down route add -net 192.168.215.0/24 netmask 255.255.255.248 gw 172.30. 
+pre-down route add -net 192.168.214.0/23 netmask 255.255.255.248 gw 172.30. 
+pre-down route add -net 192.168.31.0/26  netmask 255.255.255.248 gw 172.30. 
+#pre-down route del -net 10.0.0.0 netmask 255.0.0.0 gw 10.9.38.65
+
+----------------------------------------------------------------------------------------------------------------
+http://orlandoolguin.wordpress.com/2011/11/08/red-hat-como-incrementar-la-swap/
+
+
+
+
+
+<!-- Remove the following node to disable SSL -->
+<ssl>
+   <!-- Private key file -->
+   <privateKey>ssl/rui.key</privateKey>
+   <!-- Certificate file -->
+   <certificate>ssl/rui.crt</certificate>
+</ssl>
+
+
+useradd -s /sbin/nologin mockbuild
+
+warning: group mockbuild does not exist - using root
+warning: user mockbuild does not exist - using root
+warning: group mockbuild does not exist - using root
+warning: user mockbuild does not exist - using root
+warning: group mockbuild does not exist - using root
+
+
+
+[root@srvolnet8v etc]# cat /etc/yum.conf 
+[main]
+cachedir=/var/cache/yum/$basearch/$releasever
+keepcache=0
+debuglevel=2
+logfile=/var/log/yum.log
+exactarch=1
+obsoletes=1
+gpgcheck=1
+plugins=1
+installonly_limit=3
+
+#  This is the default, if you make this bigger yum won't see if the metadata
+# is newer on the remote and so you'll "gain" the bandwidth of not having to
+# download the new metadata and "pay" for it by yum not having correct
+# information.
+#  It is esp. important, to have correct metadata, for distributions like
+# Fedora which don't keep old packages around. If you don't like this checking
+# interupting your command line usage, it's much better to have something
+# manually check the metadata once an hour (yum-updatesd will do this).
+# metadata_expire=90m
+
+# PUT YOUR REPOS HERE OR IN separate files named file.repo
+Change enabled=1
+# in /etc/yum.repos.d
+[root@srvolnet8v etc]# cd /etc/yum.repos.d^C
+[root@srvolnet8v etc]#  wget http://public-yum.oracle.com/public-yum-ol6.repo^C
+[root@srvolnet8v etc]# 
+
+wget http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol6 -O /etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+ yum install /lib/ld-linux.so.2
+wget http://public-yum.oracle.com/public-yum-ol6.repo poner todo enable=1
+
+
+
+
+
+
+
+Guía de supervivencia.
+
+Con unos pocos comandos básicos se puede ya trabajar en vi editando y salvando un texto:
+vi arch1  arranca en modo comando editando el archivo arch1
+i         inserta texto a la izquierda del cursor
+a         agrega texto a la derecha del cursor
+ESC       vuelve a modo comando
+x         borra el caracter bajo el cursor
+dd        borra una línea
+h o flecha izquierda     mueve el cursor un caracter a la izquierda
+j o flecha abajo         mueve el cursor una línea hacia abajo
+k o flecha arriba        mueve el cursor una línea hacia arriba
+l o flecha derecha       mueve el cursor un caracter a la derecha
+:w        salva el archivo (graba en disco)
+:q        sale del editor (debe salvarse primero)
+Uso avanzado de vi.
+
+Invocación de vi.
+
+  vi
+abre la ventana de edición sin abrir ningún archivo.
+  vi arch1
+edita el archivo arch1 si existe; si no, lo crea.
+  vi arch1 arch2
+edita sucesivamente los archivos arch1 y luego arch2.
+  vi +45 arch1
+edita el archivo arch1 posicionando el cursor en la línea 45.
+  vi +$ arch1
+edita el archivo arch1 posicionando el cursor al final del archivo.
+  vi +/Habia arch1
+edita el archivo arch1 en la primera ocurrencia de la palabra "Habia".
+Cambio de modo.
+
+comando a texto:
+   teclas de inserción i I a A o O, o
+
+   tecla de sobreescritura R.
+texto a comando:
+   tecla ESC.
+comando a última línea:
+   teclas : / ?
+última línea a comando:
+   tecla ENTER (al finalizar el comando), o
+   tecla ESC (interrumpe el comando).
+
+ 
+Confundir un modo con otro la de mayor dificultades para el manejo de vi. Puede activarse un indicador de modo escribiendo
+  :set showmode
+Esto hace aparecer una leyenda que indica si se está en modo comando o inserción.
+Modo Comando.
+
+El editor vi, al igual que todo UNIX, diferencia mayúsculas y minúsculas. Confundir un comando en minúscula digitando uno en mayúscula suele tener  
+consecuencias catastróficas. Se aconseja evitar sistemáticamente el uso de la traba de mayúsculas; mantener el teclado en minúsculas.
+Números multiplicadores.
+
+Muchos comandos aceptan un número multiplicador antes del comando. La acción es idéntica a invocar el comando tantas veces como indica el  
+multiplicador. Ejemplos:
+  10j
+en modo comando avanza 10 líneas;
+  5Y
+copia 5 líneas y las retiene para luego pegar.
+Ejemplos de manejo.
+
+Los siguientes ejemplos de manejo asumen que el editor se encuentra en modo comando.
+flechas       mueven el cursor (si el terminal lo permite)
+
+h j k l       mueven el cursor (igual que las flechas) 
+itextoESC     inserta la palabra "texto" y vuelve a comando 
+x             borra el caracter sobre el cursor 
+dw            borra una palabra 
+dd            borra una línea 
+3dd           borra las 3 líneas siguientes 
+u             deshace último cambio 
+ZZ            graba cambios y sale de vi 
+:q!ENTER      sale de vi sin grabar cambios 
+/expresiónENTER     busca la expresión indicada 
+3Y            copia 3 líneas para luego pegar 
+:6r arch3     inserta debajo de la líne 6 el archivo arch3
+Movimiento del cursor:
+
+flechas      mover en distintas direcciones
+
+h o BS       una posición hacia la izquierda 
+l o SP       una posición hacia la derecha 
+k o -        una línea hacia arriba 
+j o +        una línea hacia abajo 
+$            fin de línea 
+0            principio de línea 
+1G           comienzo del archivo 
+G            fin del archivo 
+18G          línea número 18 
+Ctrl-G       mostrar número de línea actual 
+w            comienzo de la palabra siguiente 
+e            fin de la palabra siguiente 
+E            fin de la palabra siguiente antes de espacio 
+b            principio de la palabra anterior 
+^            primera palabra de la línea 
+%            hasta el paréntesis que aparea 
+H            parte superior de la pantalla 
+L            parte inferior de la pantalla 
+M            al medio de la pantalla 
+23|          cursor a la columna 23
+Control de pantalla.
+
+Ctrl-f    una pantalla adelante
+
+Ctrl-b    una pantalla atrás 
+Ctrl-l    redibujar la pantalla 
+Ctrl-d    media pantalla adelante
+Ctrl-u    media pantalla atrás
+Ingreso en modo texto:
+
+i    insertar antes del cursor
+I    insertar al principio de la línea
+a    insertar después del cursor
+A    insertar al final de la línea
+o    abrir línea debajo de la actual
+O    abrir línea encima de la actual
+R    sobreescribir (cambiar) texto
+Borrar
+
+x     borrar caracter bajo el cursor
+
+dd    borrar línea, queda guardada 
+D     borrar desde cursor a fin de línea 
+dw    borrar desde cursor a fin de palabra
+d$    borrar desde cursor a fin de línea
+d0    borrar desde cursor a principio de línea
+Copiar y pegar
+
+Y o yy      copiar línea
+
+P           pegar antes del cursor 
+p           pegar después del cursor 
+yw          copiar palabra 
+y$          copiar de cursor a fin de línea 
+"ayy o "aY  copiar línea en buffer llamado 'a' 
+'a' "ayw    copiar palabra en buffer llamado 
+"ap         pegar desde buffer 'a', a la derecha del cursor 
+"aP         pegar desde buffer 'a', a la izquierda del cursor 
+"bdd        borrar línea y guardar en buffer 'b' 
+"bdw        borrar palabra y guardar en buffer 'b'
+Búsqueda
+
+/str    buscar hacia adelante cadena de caracteres 'str'
+
+?str    buscar hacia atrás cadena de caracteres 'str' 
+n       repetir último comando / o ? 
+N       repetir último comando / o ? para el otro lado 
+fc      buscar el siguiente caracter 'c' en la línea 
+Fc      buscar el anterior caracter 'c' en la línea 
+tc      ir al caracter anterior al siguiente 'c' 
+Tc      ir al caracter posterior al precedente 'c' 
+;       repetir el último comando f, F, t, o T 
+,       último comando f, F, t, o T para el otro lado
+La cadena a buscar en / o ? puede ser una expresión regular. 
+La acción de f, F, t y T alcanza sólo a la línea actual; si el caracter buscado no está en esa línea el cursor no se mueve.
+Reemplazo
+
+Estos comandos admiten multiplicadores: un número delante del comando. Al dar un comando de reemplazo el editor coloca un símbolo $ en donde termina  
+el pedido de reemplazo. El usuario escribe normalmente, sobreescribiendo, hasta donde necesite, y sale con ESC. Estos comandos admiten  
+multiplicadores: 3cw abre un área de reemplazo para 3 palabras.
+c         reemplaza caracteres
+cw        reemplaza palabras
+C o c$    reemplaza hasta el fin de línea
+c0        reemplaza desde el comienzo de línea
+Otros
+
+J     unir dos líneas en una
+
+ZZ    grabar cambios si los hubo y salir 
+u     deshacer última acción 
+U     deshacer todos los cambios en una línea
+Modo Texto.
+
+BS    borrar caracter hacia la izquierda
+
+ESC   pasar a modo comando
+Modo ex o última línea.
+
+:q            salir si no hubo cambios
+:q!           salir sin guardar cambios
+:w            guardar cambios
+:w arch1      guardar cambios en archivo arch1
+:wq           guardar cambios y salir
+:r arch2      insertar un archivo
+:e arch2      editar un nuevo archivo
+:e! arch2     idem sin salvar anterior
+:r! comando   insertar salida de comando
+:shell        salir al shell (vuelve con exit)
+Mover
+
+:1    mueve a línea 1 
+:15   mueve a línea 15 
+:$    mueve a última línea
+Opciones
+
+:set                cambio de opciones 
+:set nu             mostrar números de línea 
+:set nonu           no mostrar números de línea 
+:set showmode       mostrar modo actual de vi 
+:set noshowmode     no mostrar modo actual de vi
+Reemplazo
+
+La sintaxis del comando de búsqueda y reemplazo es la siguiente:
+  :<desde>,<hasta>s/<buscar>/<reemplazar>/g
+<desde>, <hasta> indican líneas en el archivo; <buscar> y <reemplazar> son cadenas de caracteres o expresiones regulares; / es un separador, s  
+(sustituir) y g (global) son letras de comando para el manejo de expresiones regulares.
+ 
+
+ :1,$s/Martes/martes/g
+cambia Martes por martes en todo el archivo.
+  :.,5s/ayuda/&ndo/g
+cambia ayuda por ayudando desde línea actual hasta la 5a. línea.
+Tipo de terminal.
+
+vi es independiente del tipo de terminal, pero la variable de ambiente TERM debe estar fijada correctamente. Si no se conoce o no existe el tipo  
+exacto de terminal, en la mayoría de los terminales remotos el tipo ansi da buenos resultados. Para fijar el terminal en tipo ansi, digitar
+TERM=ansi;export TERM
+Algunos comandos, especialmente more y a veces vi, pueden no responder bien en la terminal o el emulador que se está usando. En estos casos, puede  
+usarse Ctrl-L para refrescar la pantalla. 
+  
+ 
+agregar disco 
+
+
+
+[root@rhel6 ~]# ls /sys/class/scsi_host
+host0  host1  host2
+In this rhel 6 server, there are three scsi_host exist, host0, host1 and host2.
+
+3. Rescan the SCSI Bus to Add a SCSI Device Without rebooting the VM
+
+[root@rhel6 host0]# echo "- - -" > /sys/class/scsi_host/host0/scan
+[root@rhel6 host0]# echo "- - -" > /sys/class/scsi_host/host1/scan
+[root@rhel6 host0]# echo "- - -" > /sys/class/scsi_host/host2/scan
+
+cat /proc/partitions
+
+09/05/14 10:53:07 vgextend  data /dev/sdc
+ 1019  09/05/14 10:53:31 mkfs -t ext3 /dev/sdc
+ 1020  09/05/14 10:53:42 mkfs -t ext3 /dev/sdc1
+ 1021  09/05/14 10:53:50 vgextend  data /dev/sdc1
+ 1023  09/05/14 10:54:47  lvextend -L +20G /dev/data/mysql
+ 1025  09/05/14 10:56:16  lvextend -L +10G /dev/mapper/vg_um2014s01-LogVol03
+ 1026  09/05/14 10:56:35  lvextend -L +9G /dev/mapper/vg_um2014s01-LogVol03
+ 1030  09/05/14 10:59:22 mkfs -t ext3 /dev/sdd
+ 1032  09/05/14 11:01:11 vgextend  vg_um2014s01 /dev/sdd1
+ 1033  09/05/14 11:01:41  lvextend -L +5G /dev/mapper/vg_um2014s01-lv_root 
+ 1034  09/05/14 11:02:28  lvextend -L +0.7G /dev/mapper/vg_um2014s01-LogVol03
+ 1035  09/05/14 11:02:36  lvextend -L +0.2G /dev/mapper/vg_um2014s01-LogVol03
+ 1037  09/05/14 11:03:07  lvextend -L +0.1G /dev/mapper/vg_um2014s01-LogVol03
+ 1045  09/05/14 11:23:57 history |grep ext
+
+resize2fs /dev/data/mysql
+
+
+
+
+maquina v10 debe sumarce 530 HITACHI Fibre Channel Disk (naa.60060e80132b170050202b1700000bd3):1
+1,08 TB
+
+
+maquina v11 debe quedar en 430 GB HITACHI Fibre Channel Disk (naa.60060e80132b170050202b1700000bd4):1
+1,08 TB
+
+
+
+ver performance
+
+/var/checkio.log.2014-05-19.mysql
+
+medir performance
+
+while true; do
+  LOG=`readlink -f $0`
+  LOG=`dirname $LOG`/checkio.log.`date +%F`
+  echo "---------------------- LINEA ----------------------------------------------- `date`" | tee -a $LOG.mysql $LOG.iotop $LOG.apache $LOG.lighttpd $LOG.ps $LOG.smem 1>/dev/null
+  mysql --login-path=local -e 'show full processlist' 1>>$LOG.mysql 2>&1 &
+  iotop -b -o -n 1 1>>$LOG.iotop 2>&1 &
+  ps -eo pid,user,wchan=WIDE-WCHAN-COLUMN -o s,cmd|awk ' $4 ~ /D/ {print $0}' 1>>$LOG.ps 2>&1 &
+  ps ax | awk '$3 ~ /^D/ { print $0 }' 1>>$LOG.ps 2>&1 &
+  links -dump -width 512 http://127.0.0.2/server-status 1>>$LOG.apache 2>&1 &
+  links -dump -width 512 http://190.221.2.43/light-status 1>>$LOG.lighttpd 2>&1 &
+  smem -tkn 1>>$LOG.smem 2>&1
+done
+[root@dv-back1 ~]# 
+
+
+Información del Sistema
+arch
+
+mostrar la arquitectura del equipo(1)
+
+uname -m
+
+mostrar la arquitectura del equipo(2)
+
+uname -r
+
+mostrar la versión del kernel
+
+dmidecode -q
+
+mostrar los componentes de hardware del sistema - (SMBIOS / DMI)
+
+hdparm -i /dev/hda
+
+despliega las caracteristicas de un disco duro
+
+hdparm -tT /dev/sda
+
+ejecutar prueba de lectura en un disco duro
+
+cat /proc/cpuinfo
+
+mostrar información del CPU
+
+cat /proc/interrupts
+
+mostrar interrupciones
+
+cat /proc/meminfo
+
+verificar el uso de la memoria
+
+cat /proc/swaps
+
+muestra el uso del espacio swap
+
+cat /proc/version
+
+mostrar la versión del kernel
+
+cat /proc/net/dev
+
+mostrar los adaptadores de red y estadisticas
+
+cat /proc/mounts
+
+muestra los filesystems que se encuentran montados
+
+lspci -tv
+
+mostrar los dispositivos PCI
+
+lsusb -tv
+
+mostrar los dispositivos USB
+
+date
+
+mostrar la fecha del sistema
+
+cal 2007
+
+mostrar la tabla del tiempo del 2007
+
+date 041217002007.00 
+
+establecer fecha y hora- MesDiaHoraMinutoAño.Segundos
+
+clock -w
+
+guardar cambio de fecha al BIOS
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Apagado (Reinicio del sistema y Logout )
+shutdown -h now
+
+apagar el equipo(1)
+
+init 0
+
+apagar el equipo(2)
+
+telinit 0
+
+apagar el equipo(3)
+
+shutdown -h hours:minutes &
+
+programar el apagado del equipo
+
+shutdown -c
+
+cancelar apagado programado del equipo
+
+shutdown -r now
+
+reiniciar(1)
+
+reboot
+
+reiniciar(2)
+
+logout
+
+terminar sesión
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Archivos y Directorios
+cd /home
+
+cambiar al directorio '/ home'
+
+cd ..
+
+regresar un nivel
+
+cd ../..
+
+regresar dos niveles
+
+cd
+
+cambiar al directorio home
+
+cd ~user1
+
+cambiar al directorio home
+
+cd -
+
+ir al directorio anterior
+
+pwd
+
+mostrar la ruta del directorio de trabajo
+
+ls
+
+ver archivos del directorio
+
+ls -F
+
+ver archivos del directorio
+
+ls -l
+
+mostrar detalles de archivos y directorios
+
+ls -a
+
+mostrar archivos ocultos
+
+ls *[0-9]*
+
+mostrar archivos y directorios cuyo nombre contenga numeros
+
+tree
+
+mostrar archivos y directorios en forma de arbol empezando desde root(1)
+
+lstree
+
+mostrar archivos y directorios en forma de arbol empezando desde root(2)
+
+mkdir dir1
+
+crear un directorio llamado 'dir1'
+
+mkdir dir1 dir2
+
+crear dos directorios simultaneamente
+
+mkdir -p /tmp/dir1/dir2
+
+crear un arbol de directorios
+
+rm -f file1
+
+borrar archivo con nombre 'file1'
+
+rmdir dir1
+
+borrar directorio con nombre 'dir1'
+
+rm -rf dir1
+
+borrar el directorio con nombre 'dir1' y todos sus contenidos recursivamente
+
+rm -rf dir1 dir2
+
+borrar dos directorios y todos sus contenidos recursivamente
+
+mv dir1 new_dir
+
+renombrar o mover un archivo o directorio
+
+cp file1 file2
+
+copiar un archivo
+
+cp dir/* .
+
+copiar todos los archivos de un directorio dentro del directorio de trabajo actual
+
+cp -a /tmp/dir1 .
+
+copiar un directorio dentro del directorio de trabajo actual
+
+cp -a dir1 dir2
+
+copiar un directorio
+
+ln -s file1 lnk1 
+
+crear un link simbólico a un archivo o directorio
+
+ln file1 lnk1
+
+crear un link físico a un archivo o directorio
+
+touch -t 0712250000 file1
+
+modificar el timestamp de un archivo o directorio- (AAMMDDhhmm)
+
+file file1
+
+muestra el tipo mime del archivo como texto
+
+iconv -l
+
+muestra los tipo de codificación conocidos
+
+iconv -f fromEncoding -t toEncoding inputFile > outputFile
+
+genera un archivo nuevo a partir del archivo proporcionado asumiendo que estan codificado en fromEncoding y convirtiendolo a toEncoding.
+
+find . -maxdepth 1 -name *.jpg -print -exec convert "{}" -resize 80x60 "thumbs/{}" \;
+
+redimensiona el tamaño de las imagenes en el directorio actual en modo batch batch y las manda al directorio “thums” (se requiere el programa “convert” de Imagemagick)
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Búsqueda de Archivos
+find / -name file1
+
+buscar archivos y directorios con el nombre 'file1' en el filesystem root desde '/'
+
+find / -user user1
+
+buscar archivos y directorios que le pertenezcan a 'user1'
+
+find /home/user1 -name \*.bin
+
+buscar archivos con extensión '.bin' dentro del directorio '/ home/user1' 
+
+find /usr/bin -type f -atime +100
+
+buscar archivos binarios que no han sido usados en los ultimos 100 días
+
+find /usr/bin -type f -mtime -10
+
+buscar archivos binarios creados o modificados en los ultimos diez dias
+
+find / -name \*.rpm -exec chmod 755 '{}' \;
+
+buscar archivos con extensión '.rpm' y modificar permisos
+
+find / -xdev -name \*.rpm
+
+buscar archivos con extensión '.rpm' ignorando particiones extraibles como cdrom, pen-drive, etc.…
+
+locate \*.ps
+
+mostrar archivos con la extensión '.ps' -primero ejecutar el comando 'updatedb'
+
+whereis halt
+
+mostrar la ruta del archivo binario, fuente y pagina del manual(man) para un comando dado (halt en este caso)
+
+which halt
+
+mostrar la ruta completa a un binario / ejecutable
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Montaje de un sistema de Archivos
+mount /dev/hda2 /mnt/hda2
+
+montar el disco llamado hda2 - verificar la existencia del directorio '/ mnt/hda2'
+
+umount /dev/hda2
+
+desmontar el disco hda2 - primero salir del punto de montaje '/ mnt/hda2'
+
+fuser -km /mnt/hda2
+
+forzar el desmontaje cuando el dispositivo se este utilizando
+
+umount -n /mnt/hda2
+
+ejecutar el comando umount sin escribir en el archivo /etc/mtab - es util cuando el archivo es de solo lectura o el disco duro esta lleno.
+
+mount /dev/fd0 /mnt/floppy
+
+montar un floppy
+
+mount /dev/cdrom /mnt/cdrom
+
+montar un cdrom / dvdrom
+
+mount /dev/hdc /mnt/cdrecorder
+
+montar un cdrw / dvdrom
+
+mount -o loop file.iso /mnt/cdrom
+
+montar un archivo o imagen ISO
+
+mount -t vfat /dev/hda5 /mnt/hda5
+
+montar un sistema de archivos de Windows FAT32
+
+mount /dev/sda1 /mnt/usbdisk
+
+montar un pen-drive o flash-drive USB
+
+mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share
+
+montar una unidad compartida de windows
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Espacio en Disco
+df -h
+
+mostrar una lista de las particiones montadas
+
+ls -lSr |more
+
+mostrar el tamaño de los archios y directorios ordenados por tamaño
+
+du -sh dir1
+
+mostrar el espacio ocupado estimado usado por el directorio 'dir1'
+
+du -sk * | sort -rn 
+
+mostrar el tamaño de archivos y directorios ordenados por tamaño
+
+rpm -q -a --qf '%10{SIZE}t%{NAME}n' | sort -k1,1n
+
+mostrar el espacio utilizado por los paquetes rpm instalados ordenados por tamaño (fedora, redhat y similares)
+
+dpkg-query -W -f='${Installed-Size;10}t${Package}n' | sort -k1,1n
+
+mostrar el espacio usado por los paquetes deb instalados ordenados por tamaño(ubuntu, debian y similares)
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Usuarios y Grupos
+groupadd group_name
+
+crear un grupo nuevo
+
+groupdel group_name
+
+borrar un grupo
+
+groupmod -n new_group_name old_group_name
+
+renombrar un grupo
+
+useradd -c "Name Surname " -g admin -d /home/user1 -s /bin/bash user1
+
+crear un nuevo usuario que pertenezca al grupo "admin"
+
+useradd user1
+
+crear un usuario nuevo
+
+userdel -r user1
+
+borrar un usuario ( '-r' elimina el directorio home del usuario)
+
+usermod -c "User FTP" -g system -d /ftp/user1 -s /bin/nologin user1
+
+cambiar los atributos del usuario
+
+passwd
+
+cambiar el password
+
+passwd user1
+
+cambiar el password de un usuario (solo lo puede hacer el usuario root)
+
+chage -E 2005-12-31 user1
+
+establecer la fecha limite en la que el password del usuario caduca
+
+pwck
+
+verificar la integridad del archivo de contraseñas '/etc/passwd'
+
+grpck
+
+verificar la integridad del archivo base de datos de grupos '/etc/group' 
+
+newgrp group_name
+
+cambiarse a un grupo nuevo
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Permisos en Archivos (usar "+" para asignar permiso y "-" para quitarlo)
+ls -lh
+
+mostrar permisos
+
+ls /tmp | pr -T5 -W$COLUMNS
+
+dividir la terminal en 5 columnas
+
+chmod ugo+rwx directory1
+
+establecer permisos de lectura(r), escritura (w) y acceso(x) a usuarios propietarios(u) ,de grupo (g) y otros(o)set permissions reading (r), write (w) and (x) access to users owner (u) group (g) and others (o)
+
+chmod go-rwx directory1
+
+quitar permisos de lectura(r), escritura (w) y acceso(x) a usuarios de grupo (g) y otros(o)
+
+chown user1 file1
+
+cambiar el propietario(owner) de un archivo
+
+chown -R user1 directory1
+
+cambiar el propietario de un directorio y de todos los archivos y directorios contenidos en él
+
+chgrp group1 file1
+
+cambiar el grupo a un archivo
+
+chown user1:group1 file1
+
+cambiar el usuario y grupo propietario de un archivo
+
+find / -perm -u+s
+
+ver todos los archivos en el sistema que tengan configurado el bit SUID
+
+chmod u+s /bin/file1
+
+establecer el bit SUID de un archivo binario el usuario obtinene los mismos privilegios que el propietario sobre el archivo
+
+chmod u-s /bin/file1
+
+desactivar el bit SUID en un archivo binario
+
+chmod g+s /home/public
+
+establecer el bit SGID en un directorio - similar a SUID pero para un directorio
+
+chmod g-s /home/public
+
+desactivar el bit SGID en un directorio
+
+chmod o+t /home/public
+
+establece el STIKY bit en un directorio- permite borrado de archivos solo a propietarios legítimos
+
+chmod o-t /home/public
+
+desactivar el STIKY bit en un directorio
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Atributos especiales de archivos (usar "+" para asignar permiso y "-" para quitarlo)
+chattr +a file1
+
+permitir abrir un arhchivo para escritura en modo append
+
+chattr +c file1
+
+permitir que un archivo sea compimido/descomprimido automaticamente por el kernel
+
+chattr +d file1
+
+no tomar en cuenta el archivo para backups con el programa Dump
+
+chattr +i file1
+
+hacer el archivo inmutable, el cual no podra ser eliminado, alterado, renombreado o ligado
+
+chattr +s file1
+
+le permite a un archivo ser borrado de forma segura, el archivo no podra ser recuperado de ninguna forma.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+chattr +S  file1
+
+
+
+
+
+
+
+
+
+
+
+
+escribir de forma síncrona todos loscambios echos a un archivo
+
+chattr +u file1
+
+escribir de forma síncrona todos loscambios echos a un archivo
+
+lsattr
+
+mostrar atributos especiales
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Compresión de Archivos
+bunzip2 file1.bz2
+
+descomprimir un archivo llamado 'file1.bz2'
+
+bzip2 file1
+
+comprimir un archivo llamado 'file1'
+
+gunzip file1.gz
+
+descomprimir un archivo llamado 'file1.gz'
+
+gzip file1
+
+comprimir un archivo llamado 'file1'
+
+gzip -9 file1
+
+comprimir utilizando maxima compresion
+
+rar a file1.rar test_file
+
+crear un archivo rar llamado 'file1.rar'
+
+rar a file1.rar file1 file2 dir1
+
+comprimir 'file1', 'file2' y 'dir1' simultaneamente
+
+rar x file1.rar
+
+descomprimir un archivo rar
+
+unrar x file1.rar
+
+descomprimir un archivo rar
+
+tar -cvf archive.tar file1
+
+crear un tarball (archivo tar) sin compresión
+
+tar -cvf archive.tar file1 file2 dir1
+
+crear un archivo tar que contiene a los archivos 'file1', 'file2' y 'dir1'
+
+tar -tf archive.tar
+
+mostrar los contenidos de un archivo tar
+
+tar -xvf archive.tar
+
+extraer un archivo tar
+
+tar -xvf archive.tar -C /tmp
+
+extraer un archivo tar en / tmp
+
+tar -cvfj archive.tar.bz2 dir1
+
+crear un archivo tar comprimido en bzip2
+
+tar -xvfj archive.tar.bz2
+
+descomprimir un archivo tar comprimido en bzip2
+
+tar -cvfz archive.tar.gz dir1
+
+crear un archivo tar comprimido en gzip
+
+tar -xvfz archive.tar.gz
+
+descomprimir un archivo tar comprimido en gzip
+
+zip file1.zip file1
+
+crear un archivo tar comprimido en zip
+
+zip -r file1.zip file1 file2 dir1
+
+comprimir en formato zip varios archvos y directorios simultaneamente
+
+unzip file1.zip
+
+descomprimir un archivo zip
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Paquetes RPM ( Fedora, Red Hat y similares)
+rpm -ivh package.rpm
+
+instalar un paquete rpm
+
+rpm -ivh --nodeeps package.rpm
+
+instalar un paquete rpm ignorando las peticiones de resolución de dependencias
+
+rpm -U package.rpm
+
+actualizar un paquete rpm sin hacer cambios a los archivos de configuración
+
+rpm -F package.rpm
+
+actualizar un paquete rpm solo si ya esta instalado
+
+rpm -e package_name.rpm
+
+desinstalar un paquete rpm
+
+rpm -qa
+
+mostrar todos los paquetes rpm instalados en el sistema
+
+rpm -qa | grep httpd
+
+mostrar todos los paquetes rpm que contengan en el nombre la cadena "httpd"
+
+rpm -qi package_name
+
+obtener información de un paquete instaldo
+
+rpm -qg "System Environment/Daemons"
+
+mostrar todos los paquetes rpm correspondientes a un grupo de software
+
+rpm -ql package_name
+
+mostrar la lista de archivos proporcionados por un paquete rpm instalado
+
+rpm -qc package_name
+
+mostrar la lista de archivos de configuración proporcionados por un paquete rpm instalado
+
+rpm -q package_name --whatrequires
+
+mostrar la lista de dependencias requeridas por un paquete rpm
+
+rpm -q package_name --whatprovides
+
+mostrar la funcionalidad proporcionada por un paquete
+
+rpm -q package_name --scripts
+
+mostrar los scripts iniciados durante la instalación/desinstalación
+
+rpm -q package_name --changelog
+
+mostrar la lista de revisiones de un paquete rpm
+
+rpm -qf /etc/httpd/conf/httpd.conf
+
+verificar a que paquete rpm corresponde un archivo dado
+
+rpm -qp package.rpm  -l
+
+mostrar una lista de los archivos proporcionados por un paquete rpm que aun no se ha instalado
+
+rpm --import /media/cdrom/RPM-GPG-KEY
+
+importar la firma digital de llave publica
+
+rpm --checksig package.rpm
+
+verificar la integridad de un paquete rpm
+
+rpm -qa gpg-pubkey
+
+verificar la integridad de todos los paquetes rpm instalados
+
+rpm -V package_name
+
+verificar el tamaño, permisos, tipo, propietario, grupo, checksum MD5 y ultima modificación del archivo del paquete
+
+rpm -Va
+
+verificar todos los paquetes instalados en el sistema - usar con precaución
+
+rpm -Vp package.rpm
+
+verificar un pquete rpm que no ha sido instalado todavía
+
+rpm2cpio package.rpm | cpio --extract --make-directories  *bin*
+
+extraer archivo ejecutable de un paquete rpm
+
+rpm -ivh /usr/src/redhat/RPMS/`arch`/package.rpm
+
+instalar un paquete construido de un fuente rpm
+
+rpmbuild --rebuild package_name.src.rpm
+
+construir un paquete rpm de un fuente rpm
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Actualizaación de Paquetes YUM (Fedora, RedHat y similares)
+yum install package_name
+
+descargar e instalar un paquete rpm
+
+yum localinstall package_name.rpm
+
+Intentar instalar un paquete RPM , tratando de resolver todas las dependcias usando los repositorios locales
+
+yum update package_name.rpm
+
+actualizar todos los paquetes rmp instalados en el sistema
+
+yum update package_name
+
+actualizar un paquete rpm
+
+yum remove package_name
+
+quitar un paquete rpm
+
+yum list
+
+mostrar todos los paquetes instalados en el sistema
+
+yum search package_name
+
+encontrar un paquete en un repositorio rmp
+
+yum clean packages
+
+limpiar el cache rpm borrando todos los paquetes descargados
+
+yum clean headers
+
+eliminar todos los archivos de encabezado que el sistema utiliza para resolver dependencias
+
+yum clean all
+
+eliminar del sistema los tanto paquetes como archivos de encabezado
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Paquetes DEB (Debian, Ubuntu y similares)
+dpkg -i package.deb
+
+instalación/actualización de un paquete deb
+
+dpkg -r package_name
+
+desinstalar un paquete deb del sistema
+
+dpkg -l
+
+mostrar todos los paquetes deb instalados en el sistema
+
+dpkg -l | grep httpd
+
+mostrar todos los paquetes deb que contengan en el nombre la cadena "httpd"
+
+dpkg -s package_name
+
+obtener información de un paquete específico instalado en el sistema
+
+dpkg -L package_name
+
+mostrar una lista de los archivos proporcionados por un paquete instalado en el sistema
+
+dpkg --contents package.deb
+
+mostrar una lista de los archivos proporcionados por un paquete que aun no se ha instalado
+
+dpkg -S /bin/ping
+
+verificar a que paquete corresponde un archivo
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Actualización de Paquetes APT (Debian, Ubuntu y Similares)
+apt-get install package_name
+
+instalación/actualización de un paquete deb
+
+apt-cdrom install package_name
+
+instalación/actualización de un paquete deb desde un cdrom
+
+apt-get update
+
+actualizar la lista de paquetes
+
+apt-get upgrade
+
+actualizar todos los paquetes instalados
+
+apt-get remove package_name
+
+desinstalar un paquete deb del sistema
+
+apt-get check
+
+verificar la correcta resolución de dependencias
+
+apt-get clean
+
+limpiar el cache de los paquetes descargados
+
+apt-cache search searched-package
+
+Regresta una lista de paquetes que coincida con la cadena "searched-packages"
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Ver el contenido de un archivo
+cat file1
+
+ver el contenido de un archivo empezando por el primer renglón.
+
+tac file1
+
+ver los contenidos de un archivo comenzando por la ultima línea
+
+more file1
+
+ver contenidos de un archivo una pantalla a la vez
+
+less file1
+
+similar al comando 'more' pero permite movimiento tanto hacía atras como hacia adelante
+
+head -2 file1
+
+ver las dos primeras líneas de un archivo
+
+tail -2 file1
+
+ver las ultimas dos líneas de un archivo
+
+tail -f /var/log/messages
+
+ver en tiempo real lo que se va añadiendo al archivo
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Manipulación de textos
+cat file1 file2 ... | command <> file1_in.txt_or_file1_out.txt
+
+sintaxis para manipulación de texto usando PIPE, STDIN y STDOUT
+
+cat file1 | command( sed, grep, awk, grep, etc...) > result.txt
+
+sintaxis para modificar el texto de un archivo y escribir el resultado en un archivo nuevo
+
+cat file1 | command( sed, grep, awk, grep, etc...) >> result.txt
+
+sintaxis para modificar el texto de un archivo y agregar el resultado a un archivo existente
+
+grep Aug /var/log/messages
+
+buscar la secuencia "Aug" en el archivo '/var/log/messages'
+
+grep ^Aug /var/log/messages
+
+buscar la palabras que comienzen con "Aug" en el archivo '/var/log/messages'
+
+grep [0-9] /var/log/messages
+
+seleccionar todas las líneas del archivo '/var/log/messages' que contengan numeros
+
+grep Aug -R /var/log/*
+
+buscar la cadena "Aug" en el directorio '/var/log' incluyendo subdirectorios
+
+sed 's/stringa1/stringa2/g' example.txt
+
+remplazar "string1"por "string2" en el archivo example.txt
+
+sed '/^$/d' example.txt
+
+quitar todas las líneas en blanco del archivo example.txt
+
+sed '/ *#/d; /^$/d' example.txt
+
+quitar los comentarios y todas las líneas en blanco del archivo example.txt
+
+echo 'esempio' | tr '[:lower:]' '[:upper:]'
+
+convert from lower case in upper caseconvertir de minusculas a mayusulas
+
+sed -e '1d' result.txt
+
+quitar la primera línea de example.txt
+
+sed -n '/stringa1/p'
+
+ver solo las líneas que contengan la palabra "string1"
+
+sed -e 's/ *$//' example.txt
+
+quitar caracteres vacíos al final de cada línea
+
+sed -e 's/stringa1//g' example.txt
+
+quitar solo la palabra "string1" del archivo de texto y dejar todo lo demas intacto
+
+sed -n '1,5p;5q' example.txt
+
+ver del primero al quinto renglón
+
+sed -n '5p;5q' example.txt
+
+ver el renglon numero cinco
+
+sed -e 's/00*/0/g' example.txt
+
+remplazar secuencias de ceros por un solo cero
+
+cat -n file1
+
+numerar los renglones de un archivo
+
+cat example.txt | awk 'NR%2==1'
+
+borrar todas las líneas pares del archivo example.txt
+
+echo a b c | awk '{print $1}'
+
+ver la primera columna de una linea
+
+echo a b c | awk '{print $1,$3}'
+
+ver la primera y la terce columna de una linea
+
+paste file1 file2
+
+mezclar los contenidos de dos archivos pr columna
+
+paste  -d  '+' file1 file2
+
+mezclar los contenidos de dos archivos con el delimitador '+' al centro
+
+sort file1 file2
+
+ordenar los contenidos de dos archivos
+
+sort file1 file2 | uniq
+
+ordenar los contenidos de dos archivos omitiendo los elementos repetidos
+
+sort file1 file2 | uniq -u
+
+ordenar los contenidos de dos archivos mostrando solo los elementos únicos
+
+sort file1 file2 | uniq -d
+
+ordenar los contenidos de dos archivos mostrando solo los elementos duplicados
+
+comm -1 file1 file2
+
+comparar el contenido de dos archivos borrando las líneas que aparecen unicamente en 'file1'
+
+comm -2 file1 file2
+
+comparar el contenido de dos archivos borrando las líneas que aparecen unicamente en 'file2'
+
+comm -3 file1 file2
+
+comparar el contenido de dos archivos borrando las líneas que aparecen en ambos archivos
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Conjunto de Caracteres y Conversión de Formato de Archivos
+dos2unix filedos.txt fileunix.txt
+
+convertir el formato de un archivo de texto de MSDOS a UNIX
+
+unix2dos fileunix.txt filedos.txt
+
+convertir el formato de un archivo de texto de UNIX a MSDOS
+
+recode ..HTML < page.txt > page.html
+
+convertir un archivo de texto a HTML
+
+recode -l | more
+
+mostrar todos los formatos de conversión disponibles
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Análisis de Filesystem 's
+badblocks  -v  /dev/hda1
+
+verificar la existencia de bloques erroneos en el disco hda1
+
+fsck  /dev/hda1
+
+reparar/verificar integridad de un sistema de archivos linux en el disco hda1
+
+fsck.ext2  /dev/hda1
+
+reparar/verificar integridad de un sistema de archivos ext2 en el disco hda1
+
+e2fsck  /dev/hda1
+
+reparar/verificar integridad de un sistema de archivos ext2 en el disco hda1
+
+e2fsck -j /dev/hda1
+
+reparar/verificar integridad de un sistema de archivos ext3 en el disco hda1
+
+fsck.ext3  /dev/hda1
+
+reparar/verificar integridad de un sistema de archivos ext3 en el disco hda1
+
+fsck.vfat  /dev/hda1
+
+reparar/verificar integridad de un sistema de archivos FAT en el disco hda1
+
+fsck.msdos  /dev/hda1
+
+reparar/verificar integridad de un sistema de archivos DOS en el disco hda1
+
+dosfsck  /dev/hda1
+
+reparar/verificar integridad de un sistema de archivos DOS en el disco hda1
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Formatear un Filesystem
+mkfs /dev/hda1
+
+crear un sistema de archivos tipo linux en la partición hda1
+
+mke2fs /dev/hda1
+
+crear un sistema de archivos tipo linux ext2 en la partición hda1
+
+mke2fs -j /dev/hda1
+
+crear un sistema de archivos tipo linux ext3 (journal) en la partición hda1
+
+mkfs -t vfat 32 -F /dev/hda1
+
+crear un sistema de archivos FAT32
+
+fdformat  -n /dev/fd0
+
+formatear un disco floppy
+
+mkswap /dev/hda3
+
+crear un sistema de archivos swap
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Filesystem tipo SWAP
+mkswap /dev/hda3
+
+crear un sistema de archivos swap
+
+swapon /dev/hda3
+
+activar una nueva partición swap
+
+swapon /dev/hda2 /dev/hdb3 
+
+activar dos particiones swap
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Respaldos
+dump -0aj -f /tmp/home0.bak /home 
+
+hacer un respaldo completo del directorio '/home'
+
+dump -1aj -f /tmp/home0.bak /home 
+
+hacer un respaldo incremental del directorio '/home'
+
+restore -if /tmp/home0.bak
+
+restaurar un respaldo interactivamente
+
+rsync -rogpav --delete /home /tmp
+
+sincronización entre directorios
+
+rsync -rogpav -e ssh --delete /home ip_address:/tmp 
+
+sincronización a traves de un tunel SSH
+
+rsync -az -e ssh --delete ip_addr:/home/public /home/local
+
+sincronización de un directorio local con uno remoto vía ssh y compresión
+
+rsync -az -e ssh --delete /home/local ip_addr:/home/public
+
+sincronización de un directorio remoto con uno loca vía ssh y compresión
+
+dd bs=1M if=/dev/hda | gzip | ssh user@ip_addr 'dd of=hda.gz'
+
+hacer un respaldo de un disco duro local en un host remoto via ssh
+
+dd if=/dev/sda of=/tmp/file1
+
+respaldar el contenido del disco duro a un archivo
+
+tar -Puf backup.tar /home/user
+
+hacer un respaldo incremental del directorio '/home/user'
+
+( cd /tmp/local/ && tar c . ) | ssh -C user@ip_addr 'cd /home/share/ && tar x -p'
+
+copiar el contenido de un directorio a un directorio remoto via ssh
+
+( tar c /home ) | ssh -C user@ip_addr 'cd /home/backup-home && tar x -p' 
+
+copiar el contenido de un directorio local a un directorio remoto via ssh
+
+tar cf - . | (cd /tmp/backup ; tar xf - )
+
+copia local, preservando permisos y ligas de un directorio a otro
+
+find /home/user1 -name '*.txt' | xargs cp -av --target-directory=/home/backup/ --parents
+
+encontrar y copiar todos los archivos con extensión .'txt' de un directorio a otro.
+
+find /var/log -name '*.log' | tar cv --files-from=- | bzip2 > log.tar.bz2
+
+encontrar todos los archivos con extensi[on '.log' y hacer un archivo bzip archive
+
+dd if=/dev/hda of=/dev/fd0 bs=512 count=1
+
+hacer una copía del MBR (Master Boot Record) a un disco floppy
+
+dd if=/dev/fd0 of=/dev/hda bs=512 count=1
+
+restaurar el MBR desde un backup guardado en disco
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+CDROM
+cdrecord -v gracetime=2 dev=/dev/cdrom -eject blank=fast -force
+
+limpiar un cdrom reescribible
+
+mkisofs /dev/cdrom > cd.iso
+
+crear una imagen ISO de un CdRom en el disco
+
+mkisofs /dev/cdrom | gzip > cd_iso.gz
+
+crear una imagen ISO comprimida de un CdRom en el disco
+
+mkisofs -J -allow-leading-dots -R -V "Label CD" -iso-level 4 -o ./cd.iso data_cd
+
+crear una imagen ISO a partir de un directorio
+
+cdrecord -v dev=/dev/cdrom cd.iso
+
+grabar a CD una imagen ISO
+
+gzip -dc cd_iso.gz | cdrecord dev=/dev/cdrom -
+
+grabar a CD una imagen ISO comprimida
+
+mount -o loop cd.iso /mnt/iso
+
+montar un imagen ISO
+
+cd-paranoia -B
+
+ripear (extracción digital de audio) tracks de audio de un CD a archivos wav
+
+cd-paranoia -- "-3"
+
+ripear (extracción digital de audio) los primeros tres tracks de audio de un CD a archivos wav.
+
+cdrecord --scanbus
+
+escanear el bus para identificar el canal scsi
+
+dd if=/dev/hdc | md5sum
+
+ejecutar un checksum md5 en un dispositivo como un CD
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Redes(LAN y WiFi)
+ifconfig eth0
+
+mostrar la configuración de una tarjeta de red ethernet
+
+ifup eth0
+
+activar interfaz de red 'eth0'
+
+ifdown eth0
+
+desactivar interfaz de red'eth0'
+
+ifconfig eth0 192.168.1.1 netmask 255.255.255.0
+
+configurar dirección IP
+
+ifconfig eth0 promisc
+
+configurar 'eth0' en modo promiscuo para captura de paquetes (sniffing)
+
+dhclient eth0
+
+activar la interface 'eth0' en modo dhcp
+
+route -n
+
+mostrar la tabla de ruteo
+
+route add -net 0/0 gw IP_Gateway
+
+configurar el gateway por default
+
+route add -net 192.168.0.0 netmask 255.255.0.0 gw 192.168.1.1
+
+configurar ruta estatica para alcanzar la red '192.168.0.0/16'
+
+route del 0/0 gw IP_gateway
+
+quitar ruta estatica
+
+echo "1" > /proc/sys/net/ipv4/ip_forward
+
+activar ruteo por ip
+
+hostname
+
+mostrar el nombre del equipo
+
+host www.example.com
+
+busquedas DNS del nombre proporciando para resolver de nombre a direccion ip y viceversa(1)
+
+nslookup www.example.com
+
+busquedas DNS del nombre proporciando para resolver de nombre a direccion ip y viceversa(2)
+
+ip link show
+
+mostrar el estatus del enlace de todas las interfaces de red
+
+mii-tool eth0
+
+mostrar el estatus del enlace de la tarjeta de red 'eth0'
+
+ethtool eth0
+
+mostrar estadisticas de la tarjeta de red 'eth0'
+
+netstat -tup
+
+mostrar todas las conexiones de red activas y el PID del programa al cual le corresponde el socket
+
+netstat -tupl
+
+mostrar todos los servicios que estan escuchando en el sistema y su PID correspondiente
+
+tcpdump tcp port 80
+
+mostrar todo el trafico HTTP (puerto 80)
+
+iwlist scan
+
+mostrar redes inalambricas disponibles
+
+iwconfig eth1
+
+mostrar la configuración de una tarjeta de red inalambrica
+
+hostname
+
+Mostrar el nombre del equipo
+
+host www.example.com
+
+lookup hostname to resolve name to ip address and viceversa(1)
+
+nslookup www.example.com
+
+lookup hostname to resolve name to ip address and viceversa(2)
+
+whois www.example.com
+
+buscar en la base de datos de whois
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Redes de Microsoft Windows (SAMBA)
+nbtscan ip_addr
+
+resolución de nombres por netbios
+
+nmblookup -A ip_addr
+
+resolución de nombres por netbios
+
+smbclient -L ip_addr/hostname
+
+muestra las unidades compartidas de un equipo windows
+
+smbget -Rr smb://ip_addr/share
+
+al igual que wget, permite descargar archivos desde un equipo e windows via smb
+
+mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share
+
+montar una unidad compartida de windows
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+IPTABLES (firewall)
+iptables -t filter -L
+
+mostrar todos los contenidos de la tabla de filtrado 'filter'
+
+iptables -t nat -L
+
+mostrar todos los contenidos de la tabla 'nat'
+
+iptables -t filter -F
+
+borrar todas las reglas de la tabla 'filter'
+
+iptables -t nat -F
+
+borrar todas las reglas de la tabla nat'
+
+iptables -t filter -X
+
+borrar todas las reglas creadas por el usuario
+
+iptables -t filter -A INPUT -p tcp --dport telnet -j ACCEPT
+
+permitir conecciones telnet de entrada
+
+iptables -t filter -A OUTPUT -p tcp --dport http -j DROP
+
+bloquear conecciones HTTP de salida
+
+iptables -t filter -A FORWARD -p tcp --dport pop3 -j ACCEPT
+
+permitir conecciones POP3 a la cadena forwardchain
+
+iptables -t filter -A INPUT -j LOG --log-prefix "DROP INPUT"
+
+permitir login en la cadena de entrada
+
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+configurar un PAT (Port Address Traslation) en eth0 enmascarando los paquetes de salida
+
+iptables -t nat -A PREROUTING -d 192.168.0.1 -p tcp -m tcp --dport 22 -j DNAT --to-destination 10.0.0.2:22
+
+redireccionar los paquetes dirigos a un host a otro host distinto
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Monitoreo y Depuración
+top
+
+mostrar los procesos que ocupan mas CPU
+
+ps -eafw
+
+mostar los proceso de linux
+
+ps -e -o pid,args --forest
+
+mostrar los procesos en modo jerarquico
+
+pstree 
+
+mostrar los procesos que ese estan ejecutando en forma de arbol
+
+kill -9 ID_Processo
+
+forzar el cierre y terminación de un proceso
+
+kill -1 ID_Processo
+
+forzar un proceso a re-cargar la configuración
+
+lsof -p $$
+
+mostrar una lista de los archios abiertos por un proceso
+
+lsof /home/user1
+
+mostrar una lista de los archivos abiertos en una ruta determindam
+
+strace -c ls >/dev/null
+
+mostrar las llamadas al sistema echas y recibidas por un proceso
+
+strace -f -e open ls >/dev/null
+
+mostrar las llamadas a librerias
+
+watch -n1 'cat /proc/interrupts'
+
+mostrar las interrupciones en tiempo real
+
+last reboot
+
+mostrar información de la ultima vez que se reinicio el equipo
+
+lsmod
+
+mostrar que modulos del kernel estan cargados, esta misma información se encuentra en /proc/modules.
+
+free -m
+
+mostrar el estatus de la RAM en megabytes
+
+smartctl -A /dev/hda
+
+monitorear la confiabilidad de un disco duro usando SMART
+
+smartctl -i /dev/hda
+
+verificar si SMART esta activo en un disco duro
+
+tail /var/log/dmesg
+
+mostrar los eventos inherentes al proceso de secuencia de arranque del kernel
+
+tail /var/log/messages
+
+mostrar los eventos del sistema
+
+linux commands line list v1.2 - LinuxGuide.it
+índice ^
+Otros comandos útiles
+apropos ...keyword
+
+muestra una lista de comandos relacionados con palabras clave , es util cuando se sabe lo que el programa hace pero no se sabe el nombre del comando
+
+man ping
+
+desplegar las paginas del manual que corresponden a un comando (en este caso ping)
+
+whatis ...keyword
+
+mostrar la descripción de lo que hace un programa o comando
+
+mkbootdisk --device /dev/fd0 `uname -r`
+
+crear un floppy booteable
+
+gpg -c file1
+
+encriptar un archivo con el GNU Privacy Guard
+
+gpg file1.gpg
+
+desencriptar un archivo con el GNU Privacy Guard
+
+wget -r www.example.com
+
+descargar un sitio web completo
+
+wget -c www.example.com/file.iso
+
+descargar un archivo con la posibilidad de detener la descarga y seguir descargando despues
+
+echo 'wget -c www.example.com/files.iso' | at 09:00
+
+comenzar una descarga a una hora determinada
+
+ldd /usr/bin/ssh
+
+mostrar las librerias requeridas por archivos ejecutables (ssh en este caso)
+
+alias hh='history'
+
+establecer un alias para un comando - hh = history
+
+chsh
+
+cambiar de shell de comandos
+
+chsh --list-shells
+
+mostrar los shells disponibles en el sistema
+
+who -a
+
+
+ mount-o remount, rw / mnt / foo
+ 
+  
+  mata procesos
+  ps -ef | grep ntpd | grep -v grep | awk '{print $2}' | xargs kill -9
+  
+  
+  
+  qmail
+  
+   vi tcp.smtp
+ vi tcp.smtp
+ 1003   tcprules /etc/tcp.smtp.cdb/etc/tcp.smtp.tmp </etc/tcp.smtp 
+ 
+ [root@pxm-s03 etc]# cat tcp.smtp
+127.:allow,RELAYCLIENT=""
+190.:allow,RELAYCLIENT="",DKSIGN="/etc/domainkeys/mailmkt-prx.com.ar/default",QMAILQUEUE="bin/qmail-dk", BADMIMETYPE="", CHKUSER_RCPTLIMIT="100", CHKUSER_WRONGRCPTLIMIT="10", RBLSMTPD=""
+[root@pxm-s03 etc]# 
+ 
+ovconfchg -ns bbc.http -set CLIENT_BIND_ADDR ip del server?
+ovconfchg -ns eaagt -set OPC_INT_MSG_FLT TRUE
+oalicense -set -type PERMANENT "HP Operations OS Inst Adv SW LTU"
+oalicense -set -type PERMANENT "Glance Software LTU"
+oalicense -set -type PERMANENT "HP Ops OS Inst to Realtime Inst LTU"
+ovc -restart
