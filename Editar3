@@ -1,0 +1,82 @@
+# --------------------------------------------------------------- #
+# Autor:	Skorkiz Duarte
+# Email:	skorkiz.duarte@claro.com.ar
+# Fecha:	24/06/2021
+# Propietario:	AMX Argentina S.A.
+# --------------------------------------------------------------- #
+---
+- name: "Change Timezone to Argentina TIME-Zone RHEL 5.x 6.x 7.x 8.x"
+  hosts: all
+
+  tasks:
+
+### RHEL 5.x
+    - name: "Eliminando antigua zona horaria declarada en el /etc/localtime"
+      shell: /bin/rm -f /etc/localtime
+      args:
+        executable: /bin/bash
+      when: 
+        - ansible_facts['os_family'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "5"
+
+    - name: "Creando link simbolico para nueva zona horaria en /etc/localtime"
+      shell: /bin/ln -s /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
+      args:
+        executable: /bin/bash
+      when: 
+        - ansible_facts['os_family'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "5"
+
+    - name: "Ajustando CLock del Sistema"
+      shell: echo "ZONE=\"America/Argentina/Buenos_Aires\"" > /etc/sysconfig/clock
+      args:
+        executable: /bin/bash
+      when: 
+        - ansible_facts['os_family'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "6"
+
+### RHEL 6.x
+    - name: "Eliminando antigua zona horaria declarada en el /etc/localtime"
+      shell: /bin/rm -f /etc/localtime
+      args:
+        executable: /bin/bash
+      when: 
+        - ansible_facts['os_family'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "6"
+
+    - name: "Creando link simbolico para nueva zona horaria en /etc/localtime"
+      shell: /bin/ln -s /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
+      args:
+        executable: /bin/bash
+      when: 
+        - ansible_facts['os_family'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "6"
+
+    - name: "Ajustando CLock del Sistema"
+      shell: echo "ZONE=\"America/Argentina/Buenos_Aires\"" > /etc/sysconfig/clock
+      args:
+        executable: /bin/bash
+      when: 
+        - ansible_facts['os_family'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "6"
+
+### RHEL 7.x
+    - name: "Set America/Argentina/Buenos_Aires timezone and UTC HW-Clock RHEL 7.x"
+      timezone:
+        name: "America/Argentina/Buenos_Aires"
+        hwclock: UTC
+      become: yes
+      when: 
+        - ansible_facts['os_family'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "7"
+
+### RHEL 8.x
+    - name: "Set America/Argentina/Buenos_Aires timezone and UTC HW-Clock RHEL 8.x"
+      timezone:
+        name: "America/Argentina/Buenos_Aires"
+        hwclock: UTC
+      become: yes
+      when: 
+        - ansible_facts['os_family'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "8"
+...

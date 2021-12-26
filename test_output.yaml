@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+
+    - name: Output de un Cat
+      shell: "cat /etc/passwd | awk -F: '($3 == 0) { print $1 }'"
+      register: salidaShell
+
+    - name: Print info recolectada
+      debug:
+        msg: "Info requerida: {{ salidaShell.stdout }}"
+...

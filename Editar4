@@ -1,0 +1,85 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+
+# FS / (root FS)
+
+  - shell: "df -h / | grep -v Filesystem|awk '{print $5}'|cut -d % -f1"
+    register: rootSpace
+
+  - name: "Chequeando FS / (root)"
+    debug:
+      msg: "Equipo con mas del 84% usado en el FS /  {{rootSpace.stdout}}% Usado Actualmente"
+    when: "rootSpace.stdout|float > 84"
+
+# FS /usr
+
+  - shell: "df -h /usr | grep -v Filesystem|awk '{print $5}'|cut -d % -f1"
+    register: usrSpace
+
+  - name: "Chequeando FS /usr (root)"
+    debug:
+      msg: "Equipo con mas del 84% usado en el FS /usr  {{usrSpace.stdout}}% Usado Actualmente"
+    when: "usrSpace.stdout|float > 84"
+
+# FS /boot
+
+  - shell: "df -h /boot | grep -v Filesystem|awk '{print $5}'|cut -d % -f1"
+    register: bootSpace
+
+  - name: "Chequeando FS /boot (root)"
+    debug:
+      msg: "Equipo con mas del 84% usado en el FS /boot  {{bootSpace.stdout}}% Usado Actualmente"
+    when: "bootSpace.stdout|float > 84"
+
+# FS /home
+
+  - shell: "df -h /home | grep -v Filesystem|awk '{print $5}'|cut -d % -f1"
+    register: homeSpace
+
+  - name: "Chequeando FS /home (root)"
+    debug:
+      msg: "Equipo con mas del 84% usado en el FS /home  {{homeSpace.stdout}}% Usado Actualmente"
+    when: "homeSpace.stdout|float > 84"
+
+# FS /var
+
+  - shell: "df -h /var | grep -v Filesystem|awk '{print $5}'|cut -d % -f1"
+    register: varSpace
+
+  - name: "Chequeando FS /var (root)"
+    debug:
+      msg: "Equipo con mas del 84% usado en el FS /var  {{varSpace.stdout}}% Usado Actualmente"
+    when: "varSpace.stdout|float > 84"
+
+# FS /usr/openv
+
+  - shell: "df -h /usr/openv | grep -v Filesystem|awk '{print $5}'|cut -d % -f1"
+    register: openvSpace
+
+  - name: "Chequeando FS /usr/openv (root)"
+    debug:
+      msg: "Equipo con mas del 84% usado en el FS /usr/openv  {{openvSpace.stdout}}% Usado Actualmente"
+    when: "openvSpace.stdout|float > 84"
+
+# FS /opt
+
+  - shell: "df -h /opt | grep -v Filesystem|awk '{print $5}'|cut -d % -f1"
+    register: optSpace
+
+  - name: "Chequeando FS /opt (root)"
+    debug:
+      msg: "Equipo con mas del 84% usado en el FS /opt  {{optSpace.stdout}}% Usado Actualmente"
+    when: "optSpace.stdout|float > 84"
+
+# FS /tmp
+
+  - shell: "df -h /tmp | grep -v Filesystem|awk '{print $5}'|cut -d % -f1"
+    register: tmpSpace
+
+  - name: "Chequeando FS /tmp (root)"
+    debug:
+      msg: "Equipo con mas del 84% usado en el FS /tmp  {{tmpSpace.stdout}}% Usado Actualmente"
+    when: "tmpSpace.stdout|float > 84"
+...
